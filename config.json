@@ -1,0 +1,12 @@
+{
+  "mysql": {
+    "path": "127.0.0.1:3306",
+    "config": "charset=utf8mb4&parseTime=True&loc=Local",
+    "dbName": "color",
+    "username": "root",
+    "password": "123456",
+    "maxIdleConns": 10,
+    "maxOpenConns": 10,
+    "logMode": true
+  }
+}
