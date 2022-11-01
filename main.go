@@ -2,6 +2,7 @@ package main
 
 import (
 	"colorist/config"
+	"colorist/models"
 	"colorist/routers"
 	"fmt"
 	"net/http"
@@ -67,11 +68,11 @@ func main() {
 func InitMySQL() {
 	m := Conf.Mysql
 	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", m.Username, m.Password, m.Path, m.DBName)
-	fmt.Println("dsn: ", dsn)
 
 	if config.DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{}); err != nil {
 		panic(fmt.Errorf("Mysql start failed: %s", err))
 	} else {
+		config.DB.AutoMigrate(models.Color{})
 		sqlDB, _ := config.DB.DB()
 		sqlDB.SetMaxIdleConns(Conf.Mysql.MaxIdleConns)
 		sqlDB.SetMaxOpenConns(Conf.Mysql.MaxOpenConns)

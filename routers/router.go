@@ -16,8 +16,10 @@ func InitRouter() *gin.Engine {
 	v1Group := r.Group("v1")
 	{
 		v1Group.POST("/color", controller.CreateAColor)
-		v1Group.GET("/color", controller.GetColorList)
+		v1Group.GET("/color/list", controller.GetColorList)
 		v1Group.DELETE("/color/:id", controller.DeleteAColor)
+		v1Group.POST("/star/:id", controller.StarAColor)
+		v1Group.DELETE("/star/:id", controller.CancelStar)
 	}
 
 	return r
